@@ -8,6 +8,7 @@ class HandleRequests(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         # REQUEST_COUNT.inc()
+        REQUEST_COUNT.labels('get_function', self.endpoint).inc()
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
