@@ -2,7 +2,7 @@ import http.server
 # from os import WIFCONTINUED
 from prometheus_client import start_http_server, Counter
 
-REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count")
+REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count", ['python_custom_app', 'endpoint'])
 
 class HandleRequests(http.server.BaseHTTPRequestHandler):
 
