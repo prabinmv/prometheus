@@ -7,7 +7,7 @@ REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count", ['pytho
 class HandleRequests(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
-        REQUEST_COUNT.inc()
+        # REQUEST_COUNT.inc()
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
