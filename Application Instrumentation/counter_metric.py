@@ -2,15 +2,15 @@ import http.server
 # from os import WIFCONTINUED
 from prometheus_client import start_http_server, Counter
 
-REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count")
-# REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count", ['python_custom_app', 'endpoint'])
+# REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count")
+REQUEST_COUNT = Counter("app_request_count", "Total_http_request_count", ['python_custom_app', 'endpoint'])
 
 
 class HandleRequests(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
-        REQUEST_COUNT.inc()
-        # REQUEST_COUNT.labels('get_function', self.path).inc()
+        # REQUEST_COUNT.inc()
+        REQUEST_COUNT.labels('get_function', self.path).inc()
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
