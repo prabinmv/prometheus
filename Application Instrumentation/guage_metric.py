@@ -4,6 +4,7 @@ import time
 from prometheus_client import start_http_server,Gauge
 
 REQUEST_IN_PROGRESS = Gauge("request_inprogress", "No of live request on application")
+REQUEST_LAST_SERVED = Gauge("request_last_served", "time tha application last served")
 class HandleRequests(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -14,6 +15,7 @@ class HandleRequests(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(bytes("<html><head><title>First python Application</title></head><body style='color: #333; margin-top: 30px;'><center><h2>Welcome to our first Python application.</center></h2></body></html>", "utf-8"))
         self.wfile.close
+        REQUEST_LAST_SERVED.set(time.time())
         REQUEST_IN_PROGRESS.dec()
 
 if __name__ == "__main__":
